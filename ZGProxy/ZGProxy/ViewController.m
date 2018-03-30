@@ -30,27 +30,23 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self transToTargetObj];
+    [self smallTalk];
 }
 
 #pragma mark - 伪多继承
 - (void)transToTargetObj
 {
     Dog * dog = [Dog new];
-    [self.proxy transToObj:dog];
-    [self.proxy performSelector:@selector(eat:and:) withObject:@"粑粑"];
+    [self.proxy proxyTransformToTarget:dog performSelString:@"eat:and:" withParameter:@"烤鸡"];
 
     Cat * cat = [Cat new];
-    [cat eat:@"Fish"];
-    [self.proxy transToObj:cat];
-    [self.proxy performSelector:@selector(eat:) withObject:@"Fish"];
+    [self.proxy proxyTransformToTarget:cat performSelector:@selector(eat:) withParameter:@"鱼鱼"];
 }
 
 #pragma mark - 消息机制->reslove->Fast forwarding->Normal Forwarding
 - (void)smallTalk
 {
-    Dog * dog = [Dog new];
-    [dog performSelector:NSSelectorFromString(@"dogMissMethod")];
+    [[Dog new] performSelector:NSSelectorFromString(@"dogMissMethod")];
 }
 
 #pragma mark - Push

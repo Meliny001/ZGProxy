@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ZGProxy : NSProxy
-- (void)transToObj:(id)obj;
+- (void)proxyTransformToTarget:(__nonnull id)obj;
+- (void)proxyTransformToTarget:(__nonnull id)obj performSelector:(SEL __nonnull )selector withParameter:(__nullable id)parameter;
+- (void)proxyTransformToTarget:(__nonnull id)obj performSelString:(NSString * __nonnull)selStr withParameter:(__nullable id)parameter;
 @end
